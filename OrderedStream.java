@@ -3,25 +3,26 @@ import java.util.List;
 
 class OrderedStream {
 
-    private String concatenatedList = "[";
-    List <String> pairs;
+    private String [] stream;
+    private int pointer;
 
     public OrderedStream(int n) {
-
-        pairs = new ArrayList<>(n);
+      stream = new String[n];
+      pointer = 0;
 
     }
 
     public List<String> insert(int idKey, String value) {
-            pairs.set(idKey,value);
+            List<String> result = new ArrayList<>();
+            stream[idKey-1] = value;
 
-            for (int i = idKey; i < pairs.size(); i++){
-                if (pairs.get(i+1) != null){
-                    concatenatedList += pairs.get(i+1);
-                }
-        }
+            while(pointer < stream.length && stream[pointer] != null){
+                result.add(stream[pointer]);
+                pointer++;
+            }
 
-        return pairs;
+
+        return result;
     }
 }
 
